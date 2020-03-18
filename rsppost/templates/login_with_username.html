@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+       
+        {{ form.username.label }}<br>
+        {% if form.username.errors %}
+            {{ form.username }}
+            {% for error in form.username.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        {% else %}
+            {{ form.username }}
+        {% endif %}
+        <br>
+
+        {{ form.password.label }}<br>
+        {% if form.password.errors %}
+            {{ form.password }}
+            {% for error in form.password.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        {% else %}
+            {{ form.password }}
+        {% endif %}
+        <br>
+        
+        {{ form.remember }}
+        {{ form.remember.label }}<br>
+
+        {{ form.submit }}
+    </form>
+    <p>也可以用<a href="{{ url_for('users.login') }}">邮箱</a>登录</p>
+    <p>新用户？<a href="{{ url_for('users.register') }}">点击注册</a>！</p>
+{% endblock %}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% if title %}
+        <title>RSP_Post - {{ title }}</title>
+    {% else %}
+        <title>RSP_Post</title>
+    {% endif %}
+</head>
+<body>
+    <header>
+        <a href="/">RSP_Post</a>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        {% if not current_user.is_authenticated %}
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        {% else %}
+            <a href="{{ url_for('users.profile',username=current_user.username) }} ">Profile【{{ current_user.username }}】</a>
+            <a href="/logout">Logout</a>
+            <a href="/admin">Admin(查看所有用户)</a>
+        {% endif %}
+    </header>
+    <div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <hr>
+    {% block content %}
+        
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,39 @@
+<hr>
+{% if post.title %}
+<p>标题： {{ post.title }}</p>
+{% endif %}
+
+<p>推荐人： <a href='{{ url_for('users.profile',username = post.author.username) }}'>{{ post.author.username }}</a></p>
+
+{% if post.url %}
+<p>链接： <a href="{{ post.url }}">{{ post.url }}</a></p>
+{% endif %}
+
+{% if post.body %}
+<p>推荐语： {{ post.body }}</p>
+{% endif %}
+
+
+<p>
+    {% if post.author==current_user or current_user.is_admin %}
+        <span><a href='{{ url_for('posts.delete_post',post_id=post.id) }}'>删除</a></span>
+    {% endif %}
+    <span><a href='{{ url_for('posts.like_post',post_id=post.id) }}'>点赞</a>( {{ post.likes }})</span>
+    <span><a href="{{ url_for('posts.comment_post',post_id=post.id) }}">评论</a></span>
+</p>
+{% if post.comments.first() %}
+    {% for comment in post.comments.all() %}
+        <hr>
+        <p>
+            <a href="{{ url_for('users.profile',username=comment.author.username) }}">{{ comment.author.username }}</a>评论：
+        </p>
+        <p>
+            {{ comment.content }}
+            {% if comment.author==current_user or current_user==comment.father_post.author %}
+                <a href="{{ url_for('posts.delete_comment',comment_id=comment.id) }}">删除评论</a>
+            {% endif %}
+        </p>
+    {% endfor %}
+{% endif %}
+
+<hr>

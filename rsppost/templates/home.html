@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if current_user.is_authenticated %}
+        <h1>推荐个优秀网站或一篇优秀文章呗！</h1>
+            {% include '_new_post.html' %}
+        <hr>
+    {% else %}
+        <h1>若要发表推荐，请先登录哦！</h1>
+    {% endif %}
+    
+    <h1>所有推荐</h1>
+    {% for post in posts %}
+        {% include '_post.html' %}        
+    {% endfor %}
+{% endblock %}

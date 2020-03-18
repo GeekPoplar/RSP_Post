@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        {{ form.content.label }}<br>
+        {% if form.content.errors %}
+            {{ form.content }}
+            {% for error in form.content.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        {% else %}
+            {{ form.content }}
+        {% endif %}
+        <br>
+        {{ form.submit }}
+    </form>
+{% endblock content %}

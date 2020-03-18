@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>用户信息</h1>
+    <p>用户名： {{ user.username }} </p>
+    <p>邮箱：<a href="mailto: {{ user.email }} ">{{ user.email }}</a></p>
+    <p>入驻时间： 
+        {% if not user.timestamp %}
+            很久很久以前
+        {% else %}
+            {{ user.timestamp }}
+        {% endif %}
+        
+    </p>
+    <hr>
+    <h1>历史推送</h1>
+    {% if not posts %}
+        空空如也~~
+    {% endif %}
+    {% for post in posts %}
+        {% include '_post.html' %}
+    {% endfor %}
+{% endblock %}
