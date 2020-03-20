@@ -18,6 +18,8 @@ class User(db.Model,UserMixin):
 
     timestamp=db.Column(db.DateTime,index=True,default=datetime.utcnow)
 
+    is_anonymous=db.Column(db.Boolean,default=False)
+
     posts=db.relationship('Post',backref='author',lazy='dynamic')
     comments=db.relationship('Comment',backref='author',lazy='dynamic')
 
@@ -52,6 +54,7 @@ class Post(db.Model):
 class Comment(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     content=db.Column(db.String(140))
+    likes=db.Column(db.Integer,default=0)
 
     post_id=db.Column(db.Integer,db.ForeignKey('post.id'))
     user_id=db.Column(db.Integer,db.ForeignKey('user.id'))

@@ -33,4 +33,5 @@
     </form>
     <p>也可以用<a href="{{ url_for('users.login') }}">邮箱</a>登录</p>
     <p>新用户？<a href="{{ url_for('users.register') }}">点击注册</a>！</p>
+    <p>或者你也可以选择<a href="{{ url_for('users.login_with_anonymity') }}">匿名登录</a>，点击即可登录，无需注册！</p>
 {% endblock %}

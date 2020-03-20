@@ -29,6 +29,7 @@
         </p>
         <p>
             {{ comment.content }}
+            <span><a href='{{ url_for('posts.like_comment',comment_id=comment.id) }}'>点赞</a>( {{ comment.likes }})</span>
             {% if comment.author==current_user or current_user==comment.father_post.author %}
                 <a href="{{ url_for('posts.delete_comment',comment_id=comment.id) }}">删除评论</a>
             {% endif %}

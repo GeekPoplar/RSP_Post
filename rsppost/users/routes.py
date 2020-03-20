@@ -76,3 +76,9 @@ def profile(username):
     user=User.query.filter_by(username=username).first()
     posts=Post.query.filter_by(author=user).all()
     return render_template('profile.html',title='Profile',posts=posts,user=user)
+
+@users.route('/login_with_anonymity')
+def login_with_anonymity():
+    u=User.query.get(6)
+    login_user(u)
+    return redirect(url_for('main.home'))

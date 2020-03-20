@@ -6,6 +6,7 @@
         <hr>
     {% else %}
         <h1>若要发表推荐，请先登录哦！</h1>
+        <p>或者你也可以选择<a href="{{ url_for('users.login_with_anonymity') }}">匿名登录</a>，点击即可登录，无需注册！</p>
     {% endif %}
     
     <h1>所有推荐</h1>

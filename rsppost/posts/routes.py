@@ -51,3 +51,14 @@ def delete_comment(comment_id):
         db.session.delete(c)
         db.session.commit()
         return redirect(url_for('main.home'))
+
+@posts.route('/like_comment/<comment_id>')
+@login_required
+def like_comment(comment_id):
+    c=Comment.query.get(comment_id)
+    
+    if current_user.is_authenticated:
+        c.likes+=1
+        db.session.add(c)
+        db.session.commit()
+        return redirect(url_for('main.home'))
